@@ -65,7 +65,7 @@ class Ui_MainWindow(object):
         self.label_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.label_3.setWordWrap(True)
         self.label_3.setObjectName("label_3")
-        self.label_3.setText("In each game, the rules are the same. You may remove pegs by jumping pver them with another peg, as in checkers. Your goal is to jump these pegs over each other, one by one, until only a single peg is remaining. That\'s it!")
+        self.label_3.setText("In each game, the rules are the same. You may remove pegs by jumping over them with another peg, as in checkers. Your goal is to jump these pegs over each other, one by one, until only a single peg is remaining. That\'s it!")
         self.label_4 = QtWidgets.QLabel(self.boardMenu)
         self.label_4.setGeometry(QtCore.QRect(30, 370, 190, 30))
         self.label_4.setFont(font12)
@@ -93,7 +93,7 @@ class Ui_MainWindow(object):
         self.label_7.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.label_7.setWordWrap(True)
         self.label_7.setObjectName("label_7")
-        self.label_7.setText("2. You can create your own scheme by typing the name of scheme and going to the creator by \"Go to creator!\"")
+        self.label_7.setText("2. You can create your own scheme by typing the name of scheme and going to the creator by \"Go to creator!\"\nSingle tap for initial hole, double tap for the blank place.")
         self.label_8 = QtWidgets.QLabel(self.boardMenu)
         self.label_8.setGeometry(QtCore.QRect(20, 20, 140, 20))
         font13 = QtGui.QFont()
@@ -114,7 +114,7 @@ class Ui_MainWindow(object):
         self.lineEdit.setMaxLength(18)
         self.lineEdit.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit.setText("type scheme name")
+        self.lineEdit.setPlaceholderText("type scheme name")
         self.schemBtn = QtWidgets.QPushButton(self.boardMenu, clicked = lambda: self.goCreator())
         self.schemBtn.setGeometry(QtCore.QRect(230, 60, 150, 30))
         self.schemBtn.setObjectName("schemBtn")
@@ -251,13 +251,14 @@ class Ui_MainWindow(object):
             self.btnSave.setHidden(True)
             self.boardMenu.setHidden(False)
             self.board.setHidden(True)
+            self.lineEdit.clear()
             self.reloadBoardSchemes()
 
     def goCreator(self):
         self.lineEdit.setText(self.lineEdit.text().strip())
         if self.lineEdit.text() in self.boardsschemes.keys():
             self.popbox("There is a scheme with that same name.\nPlease use another one!")
-        elif self.lineEdit.text() == "type scheme name":
+        elif self.lineEdit.text() == "":
             self.popbox("Please type a scheme name.")
         else:
             self.btnMenu.setHidden(True)
@@ -307,7 +308,7 @@ class Ui_MainWindow(object):
         self.board.setHidden(True)
         self.boardMenu.setHidden(False) 
         MainWindow.setWindowTitle(f"Peg Solitaire")
-        self.lineEdit.setText("type scheme name")    
+        self.lineEdit.clear()    
     
     def newGame(self):
         self.board.setHidden(False)
